@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-public class AddingPimUser extends BaseClass {
+public class AddingPimUser extends BaseTest {
 
   @Test
   public void testSuccessAddPIM_Employee() {

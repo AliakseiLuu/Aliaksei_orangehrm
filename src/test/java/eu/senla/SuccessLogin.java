@@ -9,9 +9,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class SuccessLogin extends BaseClass {
-
-  // assert "Cedric".equals(firstName);
+public class SuccessLogin extends BaseTest {
 
   // Параметризованный тест с параметрами заданными через testng.xml файл
   @Test

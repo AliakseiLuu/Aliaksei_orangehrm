@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class UnsuccessLogin extends BaseClass {
+public class UnsuccessLogin extends BaseTest {
 
   // Параметризованный тест с программно заданными параметрами через @DataProvider
   @Test(dataProvider = "getCredentials", description = "Failed login with invalid credentials")
