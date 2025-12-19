@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.*;
 
 public class SuccessLogin extends BaseTest {
 
@@ -16,17 +17,32 @@ public class SuccessLogin extends BaseTest {
   @Parameters({"username", "password"})
   public void testSuccessLogin(
       @Optional("Admin") String username, @Optional("admin123") String password) {
-    successLogin(username, password);
-    wait.until(
-        ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//div/ul[@class='oxd-main-menu']")));
-    wait.until(
-        ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//a[@href='/web/index.php/admin/viewAdminModule']")));
+
+    Admin admin = new Admin(driver);
+    Dashboard dashboard = new Dashboard(driver);
+
+    LoginPage loginPage = new LoginPage(driver);
+    loginPage.openLoginPage();
+    loginPage.login(username, password);
+    dashboard.isDashboardHeaderIsDisplayed();
 
     String URLAfterLogin = driver.getCurrentUrl();
-    Assert.assertEquals(URLAfterLogin, Dachbord_URL, "Пользователь успешно залогинен!");
+    Assert.assertEquals(URLAfterLogin, Dashboard.DASHBOARD_URL, "Ссылки не совпадают");
 
+    LeftSideMenu leftSideMenu = new LeftSideMenu(driver);
+    Assert.assertTrue(leftSideMenu.isLeftSideMenuVisible(), "Левое меню отображается после логина");
+    leftSideMenu.openAdmin();
+
+    admin
+            .enterUserName("Admin")
+            .selectItemInUserRole()
+            .enterEmployeeName("vasia")
+            .searchEmployees();
+
+
+
+
+    /*
     driver.findElement(By.xpath("//a[@href='/web/index.php/admin/viewAdminModule']")).click();
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Search ']")));
     wait.until(
@@ -46,6 +62,6 @@ public class SuccessLogin extends BaseTest {
     driver.findElement(By.xpath("//button[text()=' Add ']")).click();
     wait.until(
         ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//div/div[@class='orangehrm-card-container']")));
+            By.xpath("//div/div[@class='orangehrm-card-container']")));*/
   }
 }

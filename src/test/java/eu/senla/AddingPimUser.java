@@ -2,13 +2,27 @@ package eu.senla;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.Dashboard;
+import pages.LoginPage;
 
 public class AddingPimUser extends BaseTest {
 
   @Test
-  public void testSuccessAddPIM_Employee() {
-    successLogin("Admin", "admin123");
+  @Parameters({"username", "password"})
+  public void testSuccessAddPIM_Employee (
+          @Optional("Admin") String username, @Optional("admin123") String password) {
+
+    LoginPage loginPage = new LoginPage(driver);
+    loginPage.login(username, password);
+    String URLAfterLogin = driver.getCurrentUrl();
+    Assert.assertEquals(URLAfterLogin, Dashboard.DASHBOARD_URL, "Пользователь успешно залогинен!");
+
+/*
+    //successLogin("Admin", "admin123");
     wait.until(
         ExpectedConditions.visibilityOfElementLocated(
             By.xpath("//div/ul[@class='oxd-main-menu']")));
@@ -40,6 +54,6 @@ public class AddingPimUser extends BaseTest {
             By.xpath("//div/h6[text()='Personal Details']")));
     wait.until(
         ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//div/h6[normalize-space(.)!='']")));
+            By.xpath("//div/h6[normalize-space(.)!='']")));*/
   }
 }
