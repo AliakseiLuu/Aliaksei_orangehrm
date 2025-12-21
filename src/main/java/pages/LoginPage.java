@@ -18,27 +18,28 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void login (String name, String pass) {
+    public Dashboard login (String name, String pass) {
+        driver.get(LOGIN_URL);
         waitForClickable(loginButton);
         enterValue(username, name);
         enterValue(password, pass);
         click(loginButton);
+        return new Dashboard(driver);
     }
 
-    public void openLoginPage () {
-        driver.get(LOGIN_URL);
-    }
-
-    public void enterUserName (String name) {
+    public LoginPage enterUserName (String name) {
         enterValue(username, name);
+        return this;
     }
 
-    public void enterPassword (String pass) {
+    public LoginPage enterPassword (String pass) {
         enterValue(password, pass);
+        return this;
     }
 
-    public void submit () {
+    public LoginPage submit () {
         click(loginButton);
+        return this;
     }
 
     public String getUnsuccessfulLoginTaosterText () {

@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class Dashboard extends BasePage {
 
@@ -12,7 +13,17 @@ public class Dashboard extends BasePage {
         super(driver);
     }
 
-    public void isDashboardHeaderIsDisplayed () {
-        waitForVisibility(dashboardHeader);
+    public Dashboard assertDashboardHeaderIsDisplayed() {
+        Assert.assertTrue(isDisplayed(dashboardHeader), "Dashboard header is not displayed");
+        return this; // возвращаем Dashboard для цепочки
+    }
+
+    public Dashboard assertThatUrlAfterLoginIsCorrect() {
+        Assert.assertEquals(driver.getCurrentUrl(), DASHBOARD_URL, "Ссылки не совпадают");
+        return this;
+    }
+
+    public LeftSideMenu getLeftSideMenu() {
+        return new LeftSideMenu(driver);
     }
 }

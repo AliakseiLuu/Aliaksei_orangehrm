@@ -1,41 +1,21 @@
 package eu.senla;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import java.time.Duration;
-import org.openqa.selenium.By;
+import Core.DriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-  protected WebDriver driver;
-  //protected WebDriverWait wait;
-  /*protected static final String LOGIN_URL =
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
-  protected static final String Dachbord_URL =
-      "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";*/
+    protected WebDriver driver;
 
-  /*public void successLogin(String username, String password) {
-    driver.get(LOGIN_URL);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
-    wait.until(ExpectedConditions.elementToBeClickable(By.className("orangehrm-login-button")));
+    @BeforeMethod
+    public void setUp() {
+        driver = DriverManager.getDriver();
+        driver.manage().window().maximize();
+    }
 
-    driver.findElement(By.name("username")).sendKeys(username);
-    driver.findElement(By.name("password")).sendKeys(password);
-    driver.findElement(By.className("orangehrm-login-button")).click();
-  }*/
-
-  @BeforeMethod
-  public void setUp() {
-    driver = WebDriverManager.chromedriver().create();
-    driver.manage().window().maximize();
-  }
-
-  @AfterMethod
-  public void tearDown() {
-    driver.quit();
-  }
+    @AfterMethod
+    public void tearDown() {
+        DriverManager.quitDriver();
+    }
 }

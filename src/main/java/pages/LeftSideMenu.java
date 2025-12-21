@@ -15,24 +15,23 @@ public class LeftSideMenu extends BasePage {
     public LeftSideMenu(WebDriver driver) {
         super(driver);}
 
-    public boolean isLeftSideMenuVisible() {
-        try {
-            waitForVisibility(leftSideMenu);
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
+    public LeftSideMenu isLeftSideMenuVisible() {
+        waitForVisibility(leftSideMenu);
+        return this;
     }
 
-    public void openAdmin() {
+    public Admin openAdmin() {
         waitForVisibility(admin).click();
+        return new Admin(driver);
     }
 
-    public void openPIM() {
+    public PIM openPIM() {
         waitForVisibility(pim).click();
+        return new PIM(driver);
     }
 
-    public void openDashboard() {
+    public Dashboard openDashboard() {
         waitForVisibility(dashboard).click();
+        return new Dashboard(driver);
     }
 }
