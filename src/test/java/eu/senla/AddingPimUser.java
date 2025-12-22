@@ -1,28 +1,35 @@
 package eu.senla;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
+import entities.PIMUser;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.Dashboard;
 import pages.LoginPage;
 
 public class AddingPimUser extends BaseTest {
 
-    @Test
-    @Parameters({"username", "password"})
-    public void testSuccessAddPIM_Employee (
-            @Optional("Admin") String username, @Optional("admin123") String password) {
+  @Test
+  @Parameters({"username", "password"})
+  public void testSuccessAddPIM_Employee(
+      @Optional("Admin") String username, @Optional("admin123") String password) {
 
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage
-                .login(username, password)
-                .assertThatUrlAfterLoginIsCorrect()
-                .assertDashboardHeaderIsDisplayed()
-                .getLeftSideMenu()
-                .openPIM();
+    PIMUser pimUser =
+        new PIMUser.Builder()
+            .setFirstName("Aliaksei")
+            .setMiddleName("Ivanovich")
+            .setLastName("Ivanov")
+            .build();
 
-    }
+    LoginPage loginPage = new LoginPage(driver);
+    loginPage
+        .login(username, password)
+        .assertDashboardHeaderIsDisplayed()
+        .assertThatUrlAfterLoginIsCorrect()
+        .getLeftSideMenu()
+        .openPIM()
+        .clickAddButton()
+        .fillForm(pimUser)
+        .successUserCreation()
+        .displayingCreatedUserData();
+  }
 }
