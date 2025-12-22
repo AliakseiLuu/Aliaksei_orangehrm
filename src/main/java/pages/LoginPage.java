@@ -13,25 +13,25 @@ public class LoginPage extends BasePage {
   private final By unsuccessToaster = By.cssSelector("p.oxd-alert-content-text");
   private final By headerAfterLogin = By.className("oxd-topbar-header");
 
-  public LoginPage(WebDriver driver) {
+  public LoginPage(final WebDriver driver) {
     super(driver);
   }
 
-  public Dashboard login(String name, String pass) {
-    driver.get(LOGIN_URL);
+  public Dashboard login(final String name, final String pass) {
+    getDriver().get(LOGIN_URL);
     waitForClickable(loginButton);
     enterValue(username, name);
     enterValue(password, pass);
     click(loginButton);
-    return new Dashboard(driver);
+    return new Dashboard(getDriver());
   }
 
-  public LoginPage enterUserName(String name) {
+  public LoginPage enterUserName(final String name) {
     enterValue(username, name);
     return this;
   }
 
-  public LoginPage enterPassword(String pass) {
+  public LoginPage enterPassword(final String pass) {
     enterValue(password, pass);
     return this;
   }

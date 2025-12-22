@@ -18,11 +18,11 @@ public class Admin extends BasePage {
   private final By adminItemInUserRole =
       By.xpath("//div[@class='oxd-select-option']/span[text()='Admin']");
 
-  public Admin(WebDriver driver) {
+  public Admin(final WebDriver driver) {
     super(driver);
   }
 
-  public Admin enterUserName(String name) {
+  public Admin enterUserName(final String name) {
     enterValue(usernameField, name);
     return this;
   }
@@ -33,7 +33,7 @@ public class Admin extends BasePage {
     return this;
   }
 
-  public Admin enterEmployeeName(String name) {
+  public Admin enterEmployeeName(final String name) {
     enterValue(employeeNameField, name);
     return this;
   }

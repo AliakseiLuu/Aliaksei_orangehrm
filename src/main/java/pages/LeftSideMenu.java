@@ -5,12 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 public class LeftSideMenu extends BasePage {
 
-  protected By leftSideMenu = By.xpath("//div/ul[@class='oxd-main-menu']");
+  private final By leftSideMenu = By.xpath("//div/ul[@class='oxd-main-menu']");
   private final By dashboard = By.xpath("//a[@href='/web/index.php/dashboard/index']");
   private final By pim = By.xpath("//a[@href='/web/index.php/pim/viewPimModule']");
   private final By admin = By.xpath("//a[@href='/web/index.php/admin/viewAdminModule']");
 
-  public LeftSideMenu(WebDriver driver) {
+  public LeftSideMenu(final WebDriver driver) {
     super(driver);
   }
 
@@ -21,16 +21,16 @@ public class LeftSideMenu extends BasePage {
 
   public Admin openAdmin() {
     waitForVisibility(admin).click();
-    return new Admin(driver);
+    return new Admin(getDriver());
   }
 
   public PIMEmployeeList openPIM() {
     waitForVisibility(pim).click();
-    return new PIMEmployeeList(driver);
+    return new PIMEmployeeList(getDriver());
   }
 
   public Dashboard openDashboard() {
     waitForVisibility(dashboard).click();
-    return new Dashboard(driver);
+    return new Dashboard(getDriver());
   }
 }

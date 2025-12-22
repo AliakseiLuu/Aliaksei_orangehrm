@@ -1,6 +1,6 @@
 package eu.senla;
 
-import Core.DriverManager;
+import core.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
