@@ -1,22 +1,19 @@
 package pages;
 
-import static org.openqa.selenium.support.locators.RelativeLocator.with;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class Admin extends BasePage {
 
-  private final By searchButton = By.xpath("//button[text()=' Search ']");
+  private final By searchButton = By.xpath("//div//button[@type='submit']");
   private final By usernameField =
-      By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input");
-  private final By userRoleField = By.xpath("//div[text()='-- Select --']");
-  private final By employeeNameField =
-      with(By.tagName("input")).below(By.xpath("//label[text()='Employee Name']"));
-  private final By addButton = By.xpath("//button[text()=' Add ']");
+      By.xpath("//label[@class='oxd-label']/parent::div/following-sibling::div/input");
+  private final By userRoleField = By.cssSelector("div.oxd-select-text");
+  private final By employeeNameField = By.cssSelector("div.oxd-autocomplete-text-input input");
+  private final By addButton =
+      By.cssSelector("div.orangehrm-header-container > button.oxd-button[type='button']");
   private final By addUserBlock = By.xpath("//div/div[@class='orangehrm-card-container']");
-  private final By adminItemInUserRole =
-      By.xpath("//div[@class='oxd-select-option']/span[text()='Admin']");
+  private final By adminItemInUserRole = By.cssSelector("div.oxd-select-text + div>div>span");
 
   public Admin(final WebDriver driver) {
     super(driver);

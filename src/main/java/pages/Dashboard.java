@@ -8,7 +8,7 @@ public class Dashboard extends BasePage {
 
   public static final String DASHBOARD_URL =
       "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
-  private final By dashboardHeader = By.xpath("//h6[text()='Dashboard']");
+  private final By dashboardHeader = By.xpath("//span/h6");
 
   public Dashboard(final WebDriver driver) {
     super(driver);
@@ -24,7 +24,7 @@ public class Dashboard extends BasePage {
     return this;
   }
 
-  public LeftSideMenu getLeftSideMenu() {
-    return new LeftSideMenu(getDriver());
+  public Sidepanel getLeftSideMenu() {
+    return new Sidepanel(getDriver());
   }
 }

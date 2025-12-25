@@ -14,11 +14,7 @@ public class AddingPimUser extends BaseTest {
       @Optional("Admin") String username, @Optional("admin123") String password) {
 
     PIMUser pimUser =
-        new PIMUser.Builder()
-            .setFirstName("Aliaksei")
-            .setMiddleName("Ivanovich")
-            .setLastName("Ivanov")
-            .build();
+        PIMUser.builder().firstName("Aliaksei").middleName("Ivanovich").lastName("Ivanov").build();
 
     LoginPage loginPage = new LoginPage(driver);
     loginPage

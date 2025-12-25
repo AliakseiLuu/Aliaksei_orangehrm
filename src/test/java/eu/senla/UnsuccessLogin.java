@@ -8,7 +8,6 @@ import pages.LoginPage;
 
 public class UnsuccessLogin extends BaseTest {
 
-  // Параметризованный тест с программно заданными параметрами через @DataProvider
   @Test(dataProvider = "getCredentials", description = "Failed login with invalid credentials")
   void invalidCredentialsTest(String username, String password) {
 

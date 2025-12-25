@@ -10,7 +10,9 @@ public class PIMAddEmployee extends BasePage {
   private final By firstNameField = By.name("firstName");
   private final By middleNameField = By.name("middleName");
   private final By lastNameField = By.name("lastName");
-  private final By saveButton = By.xpath("//button[text()=' Save ']");
+  private final By saveButton =
+      By.xpath(
+          "//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']");
   private final By successSavingToaster = By.xpath("//div/div[contains(@class,'oxd-toast')]");
   private final By successTextInToaster = By.xpath("//div/p[text()='Success']");
 

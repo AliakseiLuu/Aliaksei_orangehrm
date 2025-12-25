@@ -20,7 +20,7 @@ public class SuccessLogin extends BaseTest {
         .assertDashboardHeaderIsDisplayed()
         .assertThatUrlAfterLoginIsCorrect()
         .getLeftSideMenu()
-        .isLeftSideMenuVisible()
+        .isSidepanelVisible()
         .openAdmin()
         .enterUserName("Admin")
         .selectItemInUserRole()
