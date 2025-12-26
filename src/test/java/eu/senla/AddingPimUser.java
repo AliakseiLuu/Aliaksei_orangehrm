@@ -19,8 +19,7 @@ public class AddingPimUser extends BaseTest {
     LoginPage loginPage = new LoginPage(driver);
     loginPage
         .login(username, password)
-        .assertDashboardHeaderIsDisplayed()
-        .assertThatUrlAfterLoginIsCorrect()
+        .waitForDashboardHeader()
         .getLeftSideMenu()
         .openPIM()
         .clickAddButton()

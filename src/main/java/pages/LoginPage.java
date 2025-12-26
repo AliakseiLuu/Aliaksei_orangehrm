@@ -11,7 +11,6 @@ public class LoginPage extends BasePage {
   public static final String LOGIN_URL =
       "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
   private final By unsuccessToaster = By.cssSelector("p.oxd-alert-content-text");
-  private final By headerAfterLogin = By.className("oxd-topbar-header");
 
   public LoginPage(final WebDriver driver) {
     super(driver);

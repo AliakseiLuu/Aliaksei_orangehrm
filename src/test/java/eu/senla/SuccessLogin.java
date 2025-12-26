@@ -1,5 +1,6 @@
 package eu.senla;
 
+import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -7,7 +8,6 @@ import pages.*;
 
 public class SuccessLogin extends BaseTest {
 
-  // Параметризованный тест с параметрами заданными через testng.xml файл
   @Test
   @Parameters({"username", "password"})
   public void testSuccessLogin(
@@ -15,10 +15,12 @@ public class SuccessLogin extends BaseTest {
 
     LoginPage loginPage = new LoginPage(driver);
 
-    loginPage
-        .login(username, password)
-        .assertDashboardHeaderIsDisplayed()
-        .assertThatUrlAfterLoginIsCorrect()
+    Dashboard dashboard = loginPage.login(username, password);
+
+    Assert.assertTrue(dashboard.isDashboardHeaderDisplayed(), "Dashboard header is not displayed");
+    Assert.assertEquals(dashboard.getCurrentUrl(), Dashboard.DASHBOARD_URL, "Ссылки не совпадают");
+
+    dashboard
         .getLeftSideMenu()
         .isSidepanelVisible()
         .openAdmin()
