@@ -14,8 +14,10 @@ public class Admin extends BasePage {
       By.cssSelector("div.orangehrm-header-container > button.oxd-button[type='button']");
   private final By addUserBlock = By.xpath("//div/div[@class='orangehrm-card-container']");
   private final By adminItemInUserRole = By.cssSelector("div.oxd-select-text + div>div>span");
+  private final By jobDropdownfield = By.xpath("//ul/li[2]/span[@class='oxd-topbar-body-nav-tab-item']");
+    private final By jobTitlesItemInJobDropdown = By.xpath("//ul/li/a[@class='oxd-topbar-body-nav-tab-link']");
 
-  public Admin(final WebDriver driver) {
+    public Admin(final WebDriver driver) {
     super(driver);
   }
 
@@ -45,4 +47,10 @@ public class Admin extends BasePage {
     waitForVisibility(addUserBlock);
     return this;
   }
+
+    public ViewJobTitleListPage openJobTitlesPage() {
+        click(jobDropdownfield);
+        click(jobTitlesItemInJobDropdown);
+        return new ViewJobTitleListPage(getDriver());
+    }
 }
