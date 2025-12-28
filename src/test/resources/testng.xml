@@ -9,6 +9,7 @@
             <class name="eu.senla.SuccessLogin"/>
             <class name="eu.senla.AddingPimUser"/>
             <class name="eu.senla.UnsuccessLogin"/>
+            <class name="eu.senla.AddJobTitle"/>
         </classes>
     </test>
 </suite>
