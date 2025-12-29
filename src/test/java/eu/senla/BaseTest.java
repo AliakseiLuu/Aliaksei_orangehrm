@@ -12,8 +12,8 @@ public class BaseTest {
 
   @BeforeMethod
   public void setUp() {
-      driver = DriverManager.getDriver();
-      driver.manage().window().maximize();
+    driver = DriverManager.getDriver();
+    driver.manage().window().maximize();
   }
 
   @AfterMethod

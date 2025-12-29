@@ -10,14 +10,14 @@ public class LoginPage extends BasePage {
   private final By password = By.name("password");
   private final By loginButton = By.className("orangehrm-login-button");
   private final By unsuccessToaster = By.cssSelector("p.oxd-alert-content-text");
-  private final String LOGIN_URL = Config.get("app.url");
+  private final String loginUrl = Config.get("app.url");
 
   public LoginPage(final WebDriver driver) {
     super(driver);
   }
 
   public Dashboard login(final String name, final String pass) {
-    getDriver().get(LOGIN_URL);
+    getDriver().get(loginUrl);
     waitForClickable(loginButton);
     enterValue(username, name);
     enterValue(password, pass);

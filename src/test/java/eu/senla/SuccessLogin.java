@@ -19,7 +19,8 @@ public class SuccessLogin extends BaseTest {
     Dashboard dashboard = loginPage.login(username, password);
 
     Assert.assertTrue(dashboard.isDashboardHeaderDisplayed(), "Dashboard header is not displayed");
-    Assert.assertEquals(dashboard.getCurrentUrl(), Config.get("dashboard.url"), "Ссылки не совпадают");
+    Assert.assertEquals(
+        dashboard.getCurrentUrl(), Config.get("dashboard.url"), "Ссылки не совпадают");
 
     dashboard
         .getLeftSideMenu()

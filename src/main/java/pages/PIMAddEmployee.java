@@ -35,13 +35,13 @@ public class PIMAddEmployee extends BasePage {
     return new PIMViewPersonalDetails(getDriver());
   }
 
-    public boolean isSuccessSavingToasterVisible() {
-        try {
-            waitForVisibility(successSavingToaster);
-            waitForVisibility(successTextInToaster);
-            return true;
-        } catch (TimeoutException e) {
-            return false;
-        }
+  public boolean isSuccessSavingToasterVisible() {
+    try {
+      waitForVisibility(successSavingToaster);
+      waitForVisibility(successTextInToaster);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
     }
+  }
 }
