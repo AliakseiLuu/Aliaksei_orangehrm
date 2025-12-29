@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class AddJobTitlePage extends BasePage {
 
   private final By jobTitleField =
-      By.xpath("//form/div/div/div/input[@class='oxd-input oxd-input--active']");
+      By.cssSelector("div.oxd-input-group input.oxd-input");
   private final By jobDescriptionField =
       By.xpath("//div/textarea[@placeholder='Type description here']");
   private final By jobAddNoteField = By.xpath("//div/textarea[@placeholder='Add note']");
