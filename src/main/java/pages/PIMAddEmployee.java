@@ -2,6 +2,7 @@ package pages;
 
 import entities.PIMUser;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 public class PIMAddEmployee extends BasePage {
@@ -32,5 +33,15 @@ public class PIMAddEmployee extends BasePage {
     waitForVisibility(successSavingToaster);
     waitForVisibility(successTextInToaster);
     return new PIMViewPersonalDetails(getDriver());
+  }
+
+  public boolean isSuccessSavingToasterVisible() {
+    try {
+      waitForVisibility(successSavingToaster);
+      waitForVisibility(successTextInToaster);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    }
   }
 }

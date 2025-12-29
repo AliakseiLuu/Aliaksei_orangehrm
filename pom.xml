@@ -20,6 +20,7 @@
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <org.projectlombok.version>1.18.42</org.projectlombok.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <com.github.javafaker.version>1.0.2</com.github.javafaker.version>
     </properties>
 
     <dependencies>
@@ -43,6 +44,11 @@
             <artifactId>lombok</artifactId>
             <version>${org.projectlombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${com.github.javafaker.version}</version>
         </dependency>
     </dependencies>
 
