@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 public class Dashboard extends BasePage {
@@ -24,7 +25,20 @@ public class Dashboard extends BasePage {
     return getDriver().getCurrentUrl();
   }
 
-  public Sidepanel getLeftSideMenu() {
+  public Sidepanel getSidepanel() {
     return new Sidepanel(getDriver());
+  }
+
+  public TopbarHeader getTopbarHeader() {
+    return new TopbarHeader(getDriver());
+  }
+
+  public boolean isHeaderVisible() {
+    try {
+      waitForVisibility(dashboardHeader);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    }
   }
 }

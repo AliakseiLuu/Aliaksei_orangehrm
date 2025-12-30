@@ -27,7 +27,7 @@ public class AddJobTitle extends BaseTest {
         loginPage
             .login(username, password)
             .waitForDashboardHeader()
-            .getLeftSideMenu()
+            .getSidepanel()
             .openAdmin()
             .openJobTitlesPage()
             .openAddJobTitlesPage()

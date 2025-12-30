@@ -26,7 +26,7 @@ public class AddingPimUser extends BaseTest {
         loginPage
             .login(username, password)
             .waitForDashboardHeader()
-            .getLeftSideMenu()
+            .getSidepanel()
             .openPIM()
             .clickAddButton()
             .fillForm(pimUser)

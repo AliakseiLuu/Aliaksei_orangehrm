@@ -23,8 +23,8 @@ public class SuccessLogin extends BaseTest {
         dashboard.getCurrentUrl(), Config.get("dashboard.url"), "Ссылки не совпадают");
 
     dashboard
-        .getLeftSideMenu()
-        .isSidepanelVisible()
+        .getSidepanel()
+        .getSidepanel()
         .openAdmin()
         .enterUserName("Admin")
         .selectItemInUserRole()

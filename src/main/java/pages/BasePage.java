@@ -33,7 +33,7 @@ public class BasePage {
     return wait.until(ExpectedConditions.elementToBeClickable(locator));
   }
 
-  public void click(final By locator) {
+  protected void click(final By locator) {
     waitForClickable(locator).click();
   }
 

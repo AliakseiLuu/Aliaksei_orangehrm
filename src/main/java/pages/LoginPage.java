@@ -44,4 +44,8 @@ public class LoginPage extends BasePage {
     waitForVisibility(unsuccessToaster);
     return getText(unsuccessToaster);
   }
+
+  public String getCurrentUrl() {
+    return getDriver().getCurrentUrl();
+  }
 }
