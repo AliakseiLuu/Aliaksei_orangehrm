@@ -7,20 +7,16 @@ import pages.LoginPage;
 
 public class LogoutTest extends BaseTest {
 
-    String username = Config.get("app.username");
-    String password = Config.get("app.password");
+  String username = Config.get("app.username");
+  String password = Config.get("app.password");
 
-    @Test
-    public void Logout(){
+  @Test
+  public void Logout() {
 
-        LoginPage loginPage = new LoginPage(driver);
+    LoginPage loginPage = new LoginPage(driver);
 
-        loginPage
-                .login(username, password)
-                .getTopbarHeader()
-                .logout();
+    loginPage.login(username, password).getTopbarHeader().logout();
 
-        Assert.assertEquals(
-                loginPage.getCurrentUrl(), Config.get("app.url"), "Ссылки не совпадают");
-    }
+    Assert.assertEquals(loginPage.getCurrentUrl(), Config.get("app.url"), "Ссылки не совпадают");
+  }
 }
