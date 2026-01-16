@@ -1,5 +1,6 @@
 package eu.senla;
 
+import config.Config;
 import net.bytebuddy.utility.RandomString;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,7 +17,7 @@ public class UnsuccessLogin extends BaseTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals("Invalid credentials", loginPage.getUnsuccessfulLoginTaosterText());
-    softAssert.assertEquals(driver.getCurrentUrl(), LoginPage.LOGIN_URL);
+    softAssert.assertEquals(driver.getCurrentUrl(), Config.get("app.url"));
     softAssert.assertAll();
     driver.navigate().refresh();
   }

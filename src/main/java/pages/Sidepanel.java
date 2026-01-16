@@ -14,7 +14,7 @@ public class Sidepanel extends BasePage {
     super(driver);
   }
 
-  public Sidepanel isSidepanelVisible() {
+  public Sidepanel getSidepanel() {
     waitForVisibility(sidepanel);
     return this;
   }
@@ -32,5 +32,10 @@ public class Sidepanel extends BasePage {
   public Dashboard openDashboard() {
     waitForVisibility(dashboard).click();
     return new Dashboard(getDriver());
+  }
+
+  public boolean isSidepanelVisible() {
+    waitForVisibility(sidepanel);
+    return true;
   }
 }

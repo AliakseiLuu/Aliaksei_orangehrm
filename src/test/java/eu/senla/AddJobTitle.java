@@ -1,37 +1,39 @@
 package eu.senla;
 
-import entities.PIMUser;
+import entities.Job;
 import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
-public class AddingPimUser extends BaseTest {
+public class AddJobTitle extends BaseTest {
 
   @Test
   @Parameters({"username", "password"})
-  public void testSuccessAddPIM_Employee(
+  public void testSuccessLogin(
       @Optional("Admin") String username, @Optional("admin123") String password) {
 
-    PIMUser pimUser =
-        PIMUser.builder()
-            .firstName(faker.name().firstName())
-            .middleName(faker.name().nameWithMiddle())
-            .lastName(faker.name().lastName())
+    Job job =
+        Job.builder()
+            .jobTitleField(faker.name().title())
+            .jobDescriptionField(faker.address().fullAddress())
+            .jobAddNoteField(faker.company().suffix())
             .build();
 
     LoginPage loginPage = new LoginPage(driver);
+
     boolean success =
         loginPage
             .login(username, password)
             .waitForDashboardHeader()
             .getSidepanel()
-            .openPIM()
-            .clickAddButton()
-            .fillForm(pimUser)
+            .openAdmin()
+            .openJobTitlesPage()
+            .openAddJobTitlesPage()
+            .fillForm(job)
             .isSuccessSavingToasterVisible();
 
-    Assert.assertTrue(success, "Pim user doesn't created");
+    Assert.assertTrue(success, "Job title doesn't created");
   }
 }

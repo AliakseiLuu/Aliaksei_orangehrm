@@ -1,5 +1,6 @@
 package pages;
 
+import config.Config;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -8,16 +9,15 @@ public class LoginPage extends BasePage {
   private final By username = By.name("username");
   private final By password = By.name("password");
   private final By loginButton = By.className("orangehrm-login-button");
-  public static final String LOGIN_URL =
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
   private final By unsuccessToaster = By.cssSelector("p.oxd-alert-content-text");
+  private final String loginUrl = Config.get("app.url");
 
   public LoginPage(final WebDriver driver) {
     super(driver);
   }
 
   public Dashboard login(final String name, final String pass) {
-    getDriver().get(LOGIN_URL);
+    getDriver().get(loginUrl);
     waitForClickable(loginButton);
     enterValue(username, name);
     enterValue(password, pass);
@@ -43,5 +43,9 @@ public class LoginPage extends BasePage {
   public String getUnsuccessfulLoginTaosterText() {
     waitForVisibility(unsuccessToaster);
     return getText(unsuccessToaster);
+  }
+
+  public String getCurrentUrl() {
+    return getDriver().getCurrentUrl();
   }
 }
