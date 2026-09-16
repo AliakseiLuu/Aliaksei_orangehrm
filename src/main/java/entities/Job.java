@@ -1,9 +1,9 @@
 package entities;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @Builder
 public class Job {
   private final String jobTitleField;

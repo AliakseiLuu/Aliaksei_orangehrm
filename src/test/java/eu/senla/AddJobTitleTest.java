@@ -2,17 +2,13 @@ package eu.senla;
 
 import entities.Job;
 import org.testng.Assert;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.LoginPage;
+import pages.Dashboard;
 
-public class AddJobTitle extends BaseTest {
+public class AddJobTitleTest extends BaseTest {
 
   @Test
-  @Parameters({"username", "password"})
-  public void testSuccessLogin(
-      @Optional("Admin") String username, @Optional("admin123") String password) {
+  public void testAddJobTitle() {
 
     Job job =
         Job.builder()
@@ -21,18 +17,15 @@ public class AddJobTitle extends BaseTest {
             .jobAddNoteField(faker.company().suffix())
             .build();
 
-    LoginPage loginPage = new LoginPage(driver);
-
     boolean success =
-        loginPage
-            .login(username, password)
+        new Dashboard(driver)
             .waitForDashboardHeader()
             .getSidepanel()
             .openAdmin()
             .openJobTitlesPage()
             .openAddJobTitlesPage()
             .fillForm(job)
-            .isSuccessSavingToasterVisible();
+            .isSuccessToasterVisible();
 
     Assert.assertTrue(success, "Job title doesn't created");
   }

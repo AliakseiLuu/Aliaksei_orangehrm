@@ -3,20 +3,17 @@ package eu.senla;
 import config.Config;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
+import pages.Dashboard;
 
 public class LogoutTest extends BaseTest {
-
-  String username = Config.get("app.username");
-  String password = Config.get("app.password");
 
   @Test
   public void Logout() {
 
-    LoginPage loginPage = new LoginPage(driver);
+    Dashboard dashboard = new Dashboard(driver);
 
-    loginPage.login(username, password).getTopbarHeader().logout();
+    dashboard.getTopbarHeader().logout();
 
-    Assert.assertEquals(loginPage.getCurrentUrl(), Config.get("app.url"), "Ссылки не совпадают");
+    Assert.assertEquals(dashboard.getCurrentUrl(), Config.get("app.url"), "Ссылки не совпадают");
   }
 }

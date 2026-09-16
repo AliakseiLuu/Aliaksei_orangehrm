@@ -18,6 +18,10 @@ public class Admin extends BasePage {
       By.xpath("//ul/li[2]/span[@class='oxd-topbar-body-nav-tab-item']");
   private final By jobTitlesItemInJobDropdown =
       By.xpath("//ul/li/a[@class='oxd-topbar-body-nav-tab-link']");
+  private final By organizationDropdownfield =
+      By.xpath("//ul/li[3]/span[@class='oxd-topbar-body-nav-tab-item']");
+  private final By locationsItemInOrganizationDropdown =
+      By.xpath("//ul/li[2]/a[@class='oxd-topbar-body-nav-tab-link']");
 
   public Admin(final WebDriver driver) {
     super(driver);
@@ -54,5 +58,11 @@ public class Admin extends BasePage {
     click(jobDropdownfield);
     click(jobTitlesItemInJobDropdown);
     return new ViewJobTitleListPage(getDriver());
+  }
+
+  public OrganizationLocationsPage openOrganizationLocationsPage() {
+    click(organizationDropdownfield);
+    click(locationsItemInOrganizationDropdown);
+    return new OrganizationLocationsPage(getDriver());
   }
 }
