@@ -2,12 +2,20 @@ package eu.senla;
 
 import config.Config;
 import net.bytebuddy.utility.RandomString;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 
-public class UnsuccessLogin extends BaseTest {
+public class UnsuccessLoginTest extends BaseTest {
+
+  @BeforeClass
+  public void forceUiLogin() {
+    System.setProperty("login.type", "ui");
+    autoLogin = false;
+  }
 
   @Test(dataProvider = "getCredentials", description = "Failed login with invalid credentials")
   void invalidCredentialsTest(String username, String password) {
@@ -29,5 +37,10 @@ public class UnsuccessLogin extends BaseTest {
       {RandomString.make(), "admin123"},
       {RandomString.make(), RandomString.make()}
     };
+  }
+
+  @AfterClass
+  public void restoreLoginType() {
+    System.clearProperty("login.type");
   }
 }

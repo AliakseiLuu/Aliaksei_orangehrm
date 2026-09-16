@@ -25,27 +25,8 @@ public class LoginPage extends BasePage {
     return new Dashboard(getDriver());
   }
 
-  public LoginPage enterUserName(final String name) {
-    enterValue(username, name);
-    return this;
-  }
-
-  public LoginPage enterPassword(final String pass) {
-    enterValue(password, pass);
-    return this;
-  }
-
-  public LoginPage submit() {
-    click(loginButton);
-    return this;
-  }
-
   public String getUnsuccessfulLoginTaosterText() {
     waitForVisibility(unsuccessToaster);
     return getText(unsuccessToaster);
-  }
-
-  public String getCurrentUrl() {
-    return getDriver().getCurrentUrl();
   }
 }
