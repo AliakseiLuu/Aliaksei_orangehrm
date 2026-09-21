@@ -25,15 +25,6 @@ public class SuccessLoginTest extends BaseTest {
     Assert.assertTrue(dashboard.isDashboardHeaderDisplayed(), "Dashboard header is not displayed");
     Assert.assertEquals(
         dashboard.getCurrentUrl(), Config.get("dashboard.url"), "Ссылки не совпадают");
-
-    dashboard
-        .getSidepanel()
-        .getSidepanel()
-        .openAdmin()
-        .enterUserName("Admin")
-        .selectItemInUserRole()
-        .enterEmployeeName("vasia")
-        .searchEmployees();
   }
 
   @AfterClass

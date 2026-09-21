@@ -1,6 +1,7 @@
 package pages;
 
 import java.time.Duration;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Slf4j
 public class BasePage {
 
   private final WebDriver driver;
@@ -31,33 +33,40 @@ public class BasePage {
   }
 
   public final WebElement waitForVisibility(final By locator) {
+    log.debug("Waiting for visible: {}", locator);
     return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
   }
 
   public final WebElement waitForClickable(final By locator) {
+    log.debug("Waiting for clickable: {}", locator);
     return wait.until(ExpectedConditions.elementToBeClickable(locator));
   }
 
   protected void click(final By locator) {
+    log.debug("Click on the element: {}", locator);
     waitForClickable(locator).click();
   }
 
   public void enterValue(final By locator, final String text) {
     WebElement element = waitForVisibility(locator);
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+    log.debug("Enter value: '{}', in the element: {}", text, locator);
     element.sendKeys(text);
 
     if (!text.equals(element.getAttribute("value"))) {
       element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+      log.debug("Enter value: '{}', in the element: {}", text, locator);
       element.sendKeys(text);
     }
   }
 
   public String getText(final By locator) {
+    log.debug("Get text from element: {}", locator);
     return waitForVisibility(locator).getText();
   }
 
   public boolean isDisplayed(final By locator) {
+    log.debug("Check that element: {} is displayed", locator);
     try {
       return waitForVisibility(locator).isDisplayed();
     } catch (Exception e) {
@@ -66,6 +75,7 @@ public class BasePage {
   }
 
   public void selectFromDropdown(final By dropdownField, final String optionText) {
+    log.debug("Select item: '{}', in the dropdown element: {}", optionText, dropdownField);
     waitForClickable(dropdownField);
     click(dropdownField);
 
@@ -80,6 +90,7 @@ public class BasePage {
   }
 
   public boolean isSuccessToasterVisible() {
+    log.debug("Check thet success toaster is visible");
     try {
       waitForVisibility(SUCCESS_TOASTER);
       waitForVisibility(SUCCESS_TOASTER_TEXT);
@@ -90,6 +101,7 @@ public class BasePage {
   }
 
   public void selectFirstAutocompleteSuggestion(final By inputLocator, final String typedText) {
+    log.debug("Enter value: '{}', in the autocomplete element: {}", typedText, inputLocator);
     WebElement input = waitForVisibility(inputLocator);
     input.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
     input.sendKeys(typedText);
@@ -106,10 +118,12 @@ public class BasePage {
       }
       throw e;
     }
+    log.debug("Select first option from autocomplete.");
     click(firstOption);
   }
 
   protected void unfocus() {
+    log.debug("Remove focus from selected element.");
     driver.findElement(By.tagName("body")).click();
   }
 }
