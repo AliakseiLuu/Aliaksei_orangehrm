@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
 
-  private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+  private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
   private DriverManager() {}
 
