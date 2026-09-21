@@ -1,12 +1,14 @@
 package entities;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @Builder
 public class PIMUser {
+
   private final String firstName;
   private final String middleName;
   private final String lastName;
+  private final String employeeId;
 }

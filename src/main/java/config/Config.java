@@ -18,22 +18,12 @@ public final class Config {
     }
   }
 
-  private Config() {
-
-  }
+  private Config() {}
 
   public static String get(final String key) {
     return System.getProperty(
         key,
         System.getenv()
             .getOrDefault(key.toUpperCase().replace('.', '_'), PROPERTIES.getProperty(key)));
-  }
-
-  public static String getOrDefault(final String key, final String defaultValue) {
-    return System.getProperty(
-        key,
-        System.getenv()
-            .getOrDefault(
-                key.toUpperCase().replace('.', '_'), PROPERTIES.getProperty(key, defaultValue)));
   }
 }

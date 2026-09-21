@@ -9,6 +9,7 @@ public class Sidepanel extends BasePage {
   private final By dashboard = By.xpath("//a[@href='/web/index.php/dashboard/index']");
   private final By pim = By.xpath("//a[@href='/web/index.php/pim/viewPimModule']");
   private final By admin = By.xpath("//a[@href='/web/index.php/admin/viewAdminModule']");
+  private final By leave = By.xpath("//a[@href='/web/index.php/leave/viewLeaveModule']");
 
   public Sidepanel(final WebDriver driver) {
     super(driver);
@@ -37,5 +38,10 @@ public class Sidepanel extends BasePage {
   public boolean isSidepanelVisible() {
     waitForVisibility(sidepanel);
     return true;
+  }
+
+  public LeaveListPage openLeave() {
+    waitForVisibility(leave).click();
+    return new LeaveListPage(getDriver());
   }
 }

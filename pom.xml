@@ -12,7 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <selenium-java.version>4.38.0</selenium-java.version>
+        <selenium-java.version>4.48.0</selenium-java.version>
         <webdrivermanager.version>6.3.3</webdrivermanager.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <spotless-maven-plugin.version>3.0.0</spotless-maven-plugin.version>
@@ -21,6 +21,8 @@
         <org.projectlombok.version>1.18.42</org.projectlombok.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <com.github.javafaker.version>1.0.2</com.github.javafaker.version>
+        <io.rest-assured>6.0.0</io.rest-assured>
+        <ch.qos.logback>1.6.3</ch.qos.logback>
     </properties>
 
     <dependencies>
@@ -50,6 +52,17 @@
             <artifactId>javafaker</artifactId>
             <version>${com.github.javafaker.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${io.rest-assured}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${ch.qos.logback}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

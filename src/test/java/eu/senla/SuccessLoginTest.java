@@ -2,12 +2,16 @@ package eu.senla;
 
 import config.Config;
 import org.testng.Assert;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.*;
 
-public class SuccessLogin extends BaseTest {
+public class SuccessLoginTest extends BaseTest {
+
+  @BeforeClass
+  public void forceUiLogin() {
+    System.setProperty("login.type", "ui");
+    autoLogin = false;
+  }
 
   @Test
   @Parameters({"username", "password"})
@@ -21,14 +25,10 @@ public class SuccessLogin extends BaseTest {
     Assert.assertTrue(dashboard.isDashboardHeaderDisplayed(), "Dashboard header is not displayed");
     Assert.assertEquals(
         dashboard.getCurrentUrl(), Config.get("dashboard.url"), "Ссылки не совпадают");
+  }
 
-    dashboard
-        .getSidepanel()
-        .getSidepanel()
-        .openAdmin()
-        .enterUserName("Admin")
-        .selectItemInUserRole()
-        .enterEmployeeName("vasia")
-        .searchEmployees();
+  @AfterClass
+  public void restoreLoginType() {
+    System.clearProperty("login.type");
   }
 }
