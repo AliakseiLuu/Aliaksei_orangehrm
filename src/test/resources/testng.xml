@@ -3,6 +3,7 @@
     <listeners>
         <listener class-name="listener.LoggingListener"/>
         <listener class-name="listener.SuiteXmlTransformer"/>
+        <listener class-name="listener.VideoListener"/>
     </listeners>
     <test name="Smoke">
 
