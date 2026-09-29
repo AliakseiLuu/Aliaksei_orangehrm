@@ -17,11 +17,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+       /* stage('Checkout') {
             steps {
                 git url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git', credentialsId: 'github-token'
             }
-        }
+        }*/
 
         stage('Run tests') {
             steps {
@@ -30,7 +30,7 @@ pipeline {
                     -Dbrowser=${params.browser} \
                     -DthreadCount=${params.threadCount} \
                     -Dconfig=${params.config} \
-                    "-DselenoidEnabled=${params.selenoidEnabled}" \
+                    "-Dselenoid.enabled=${params.selenoidEnabled}" \
                 """
             }
             post {
