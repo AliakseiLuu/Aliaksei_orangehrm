@@ -1,6 +1,7 @@
 package pages;
 
 import entities.OrganizationLocation;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -33,6 +34,7 @@ public class AddOrganizationLocationPage extends BasePage {
     super(driver);
   }
 
+  @Step("Fill organization location form for creation")
   public AddOrganizationLocationPage fillForm(final OrganizationLocation location) {
     enterValue(NAME_FIELD, location.getName());
     enterValue(CITY_FIELD, location.getCity());
@@ -46,6 +48,7 @@ public class AddOrganizationLocationPage extends BasePage {
     return this;
   }
 
+  @Step("Save organization location")
   public AddOrganizationLocationPage save() {
     click(SAVE_BUTTON);
     return this;

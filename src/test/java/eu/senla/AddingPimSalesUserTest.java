@@ -1,6 +1,7 @@
 package eu.senla;
 
 import entities.PIMUser;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Dashboard;
@@ -8,6 +9,12 @@ import pages.Dashboard;
 public class AddingPimSalesUserTest extends BaseTest {
 
   @Test
+  @Epic("PIM")
+  @Feature("Employee management")
+  @Story("Add employee")
+  @Severity(SeverityLevel.CRITICAL)
+  @Owner("AliakseiL")
+  @Description("Создание PIM-сотрудника и назначение должности Sales Representative")
   public void testSuccessAddPIM_Employee() {
 
     PIMUser pimUser =
@@ -30,6 +37,8 @@ public class AddingPimSalesUserTest extends BaseTest {
             .changeUserJobTitleToSales("Sales Representative")
             .isSuccessToasterVisible();
 
-    Assert.assertTrue(success, "Pim Sales user doesn't created");
+    Allure.step(
+        "Assert: тостер об успехе виден",
+        () -> Assert.assertTrue(success, "Pim Sales user doesn't created"));
   }
 }

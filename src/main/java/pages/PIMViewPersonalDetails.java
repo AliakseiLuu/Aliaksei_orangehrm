@@ -1,6 +1,7 @@
 package pages;
 
 import entities.PersonalDetailBlock;
+import io.qameta.allure.Step;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -85,6 +86,7 @@ public class PIMViewPersonalDetails extends BasePage {
     return this;
   }
 
+  @Step("Fill PIM user personal details form")
   public PIMViewPersonalDetails fillForm(final PersonalDetailBlock personalDetailBlock) {
     enterValue(firstNameField, personalDetailBlock.getFirstNameField());
     enterValue(middleNameField, personalDetailBlock.getMiddleNameField());
@@ -101,6 +103,7 @@ public class PIMViewPersonalDetails extends BasePage {
     return this;
   }
 
+  @Step("Go to the Job details page")
   public PIMViewJobDetails openJobDetails() {
     click(jobDetails);
     return new PIMViewJobDetails(getDriver());

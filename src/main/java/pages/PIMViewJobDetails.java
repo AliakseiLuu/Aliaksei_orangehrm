@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,6 +17,7 @@ public class PIMViewJobDetails extends BasePage {
     super(driver);
   }
 
+  @Step("Change user job title")
   public PIMViewJobDetails changeUserJobTitleToSales(final String option) {
     selectFromDropdown(jobTitleDropdown, option);
     click(saveButton);

@@ -1,6 +1,7 @@
 package eu.senla;
 
 import entities.Job;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Dashboard;
@@ -9,6 +10,12 @@ import pages.ViewJobTitleListPage;
 public class RemoveJobTitleTest extends BaseTest {
 
   @Test
+  @Epic("Admin")
+  @Feature("Job management")
+  @Story("Remove Job title")
+  @Severity(SeverityLevel.NORMAL)
+  @Owner("AliakseiL")
+  @Description("Создание и дальнейшее удаление нового Job Title")
   public void testSuccessRemoveJobTitle() {
 
     Job job =
@@ -27,7 +34,9 @@ public class RemoveJobTitleTest extends BaseTest {
             .fillForm(job)
             .isSuccessToasterVisible();
 
-    Assert.assertTrue(success, "Job title doesn't created");
+    Allure.step(
+        "Job title successfully created, success toaster appears",
+        () -> Assert.assertTrue(success, "Job title doesn't created"));
 
     ViewJobTitleListPage viewJobTitleListPage = new ViewJobTitleListPage(driver);
 
@@ -37,6 +46,8 @@ public class RemoveJobTitleTest extends BaseTest {
             .agreeWithDelitingJobTitle()
             .isSuccessToasterVisible();
 
-    Assert.assertTrue(successRemoveJobTitle, "Job title doesn't remove");
+    Allure.step(
+        "Job title successfully deleted, success toaster appears",
+        () -> Assert.assertTrue(successRemoveJobTitle, "Job title doesn't remove"));
   }
 }

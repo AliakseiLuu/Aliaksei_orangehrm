@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -54,12 +55,14 @@ public class Admin extends BasePage {
     return this;
   }
 
+  @Step("Go to the Job Title page")
   public ViewJobTitleListPage openJobTitlesPage() {
     click(jobDropdownfield);
     click(jobTitlesItemInJobDropdown);
     return new ViewJobTitleListPage(getDriver());
   }
 
+  @Step("Go to the Organization Location page")
   public OrganizationLocationsPage openOrganizationLocationsPage() {
     click(organizationDropdownfield);
     click(locationsItemInOrganizationDropdown);

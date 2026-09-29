@@ -1,6 +1,7 @@
 package pages;
 
 import entities.PIMUser;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -21,6 +22,7 @@ public class PIMAddEmployee extends BasePage {
     super(driver);
   }
 
+  @Step("Fill pimUser employee form")
   public PIMAddEmployee fillForm(final PIMUser pimUser) {
     enterValue(firstNameField, pimUser.getFirstName());
     enterValue(middleNameField, pimUser.getMiddleName());

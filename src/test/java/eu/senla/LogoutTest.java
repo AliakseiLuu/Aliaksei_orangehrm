@@ -1,6 +1,7 @@
 package eu.senla;
 
 import config.Config;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -17,6 +18,12 @@ public class LogoutTest extends BaseTest {
   }
 
   @Test
+  @Epic("Header")
+  @Feature("User functionality")
+  @Story("Logout")
+  @Severity(SeverityLevel.CRITICAL)
+  @Owner("AliakseiL")
+  @Description("Проверка Logout юзера")
   @Parameters({"username", "password"})
   public void Logout() {
 
@@ -25,6 +32,10 @@ public class LogoutTest extends BaseTest {
 
     dashboard.getTopbarHeader().logout();
 
-    Assert.assertEquals(dashboard.getCurrentUrl(), Config.get("app.url"), "Ссылки не совпадают");
+    Allure.step(
+        "User successfully logout",
+        () ->
+            Assert.assertEquals(
+                dashboard.getCurrentUrl(), Config.get("app.url"), "Ссылки не совпадают"));
   }
 }

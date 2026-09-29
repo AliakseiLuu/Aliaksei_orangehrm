@@ -31,7 +31,7 @@ public class LoggingListener implements ITestListener {
     if (driver != null) {
       ScreenshotUtil.takeScreenshot(driver);
     } else {
-      System.out.println("WebDriver is null. Screenshot not taken.");
+      LOG.warn("WebDriver is null. Screenshot not taken.");
     }
   }
 }

@@ -1,6 +1,7 @@
 package eu.senla;
 
 import entities.Job;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Dashboard;
@@ -8,6 +9,12 @@ import pages.Dashboard;
 public class AddJobTitleTest extends BaseTest {
 
   @Test
+  @Epic("Admin")
+  @Feature("Job management")
+  @Story("Add job title")
+  @Severity(SeverityLevel.NORMAL)
+  @Owner("AliakseiL")
+  @Description("Создание нового Job Title")
   public void testAddJobTitle() {
 
     Job job =
@@ -27,6 +34,8 @@ public class AddJobTitleTest extends BaseTest {
             .fillForm(job)
             .isSuccessToasterVisible();
 
-    Assert.assertTrue(success, "Job title doesn't created");
+    Allure.step(
+        "Job title successfully created, success toaster appears",
+        () -> Assert.assertTrue(success, "Job title doesn't created"));
   }
 }

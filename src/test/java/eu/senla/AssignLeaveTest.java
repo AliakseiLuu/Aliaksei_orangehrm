@@ -1,6 +1,7 @@
 package eu.senla;
 
 import entities.AssignLeave;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Dashboard;
@@ -10,6 +11,12 @@ import utils.TestDataUtils;
 public class AssignLeaveTest extends BaseTest {
 
   @Test
+  @Epic("Leave")
+  @Feature("Assign Leave Management")
+  @Story("Add Assign Leave")
+  @Severity(SeverityLevel.NORMAL)
+  @Owner("AliakseiL")
+  @Description("Назначение Assign Leave текущему пользователю")
   public void assignLeaveTest() {
 
     LeaveAssignLeavePage leaveAssignLeavePage = new LeaveAssignLeavePage(driver);
@@ -34,6 +41,8 @@ public class AssignLeaveTest extends BaseTest {
             .confirmInsufficientBalanceIfShown()
             .isSuccessToasterVisible();
 
-    Assert.assertTrue(success, "Assign leave doesn't created");
+    Allure.step(
+        "Assign leave successfully created, success toaster appears",
+        () -> Assert.assertTrue(success, "Assign leave doesn't created"));
   }
 }

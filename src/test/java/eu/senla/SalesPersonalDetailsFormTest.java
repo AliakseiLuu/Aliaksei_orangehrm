@@ -1,6 +1,7 @@
 package eu.senla;
 
 import entities.PersonalDetailBlock;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Dashboard;
@@ -9,6 +10,12 @@ import utils.TestDataUtils;
 public class SalesPersonalDetailsFormTest extends BaseTest {
 
   @Test
+  @Epic("PIM")
+  @Feature("Employee Management")
+  @Story("Personal details form")
+  @Severity(SeverityLevel.NORMAL)
+  @Owner("AliakseiL")
+  @Description("Редактирование информации на странице Personal details для Sales юзера")
   void salesPersonalDetailsFormTest() {
 
     PersonalDetailBlock personalDetailBlock =
@@ -36,6 +43,8 @@ public class SalesPersonalDetailsFormTest extends BaseTest {
             .fillForm(personalDetailBlock)
             .isSuccessToasterVisible();
 
-    Assert.assertTrue(success, "Personal details were not saved");
+    Allure.step(
+        "Personal details successfully changed ans saved, success toaster appears",
+        () -> Assert.assertTrue(success, "Personal details were not saved"));
   }
 }

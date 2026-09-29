@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.By;
@@ -27,6 +28,7 @@ public class OrganizationLocationsPage extends BasePage {
     return new AddOrganizationLocationPage(getDriver());
   }
 
+  @Step("Filtering location list by the country")
   public OrganizationLocationsPage filterLocationListByCountry(final String country) {
     selectFromDropdown(COUNTRY_DROPDOWN, country);
     click(SEARCH_BUTTON);

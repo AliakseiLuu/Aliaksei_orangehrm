@@ -1,6 +1,7 @@
 package pages;
 
 import entities.Job;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,6 +19,7 @@ public class AddJobTitlePage extends BasePage {
     super(driverParam);
   }
 
+  @Step("Fill job title form for creation")
   public AddJobTitlePage fillForm(final Job job) {
     enterValue(jobTitleField, job.getJobTitleField());
     enterValue(jobDescriptionField, job.getJobDescriptionField());

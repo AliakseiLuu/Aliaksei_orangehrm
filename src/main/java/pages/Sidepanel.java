@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,16 +21,19 @@ public class Sidepanel extends BasePage {
     return this;
   }
 
+  @Step("Go to the page - Admin")
   public Admin openAdmin() {
     waitForVisibility(admin).click();
     return new Admin(getDriver());
   }
 
+  @Step("Go to the page - PIM")
   public PIMEmployeeList openPIM() {
     waitForVisibility(pim).click();
     return new PIMEmployeeList(getDriver());
   }
 
+  @Step("Go to the page - Dashboard")
   public Dashboard openDashboard() {
     waitForVisibility(dashboard).click();
     return new Dashboard(getDriver());
@@ -40,6 +44,7 @@ public class Sidepanel extends BasePage {
     return true;
   }
 
+  @Step("Go to the page - Leave")
   public LeaveListPage openLeave() {
     waitForVisibility(leave).click();
     return new LeaveListPage(getDriver());

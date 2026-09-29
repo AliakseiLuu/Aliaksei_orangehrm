@@ -1,6 +1,7 @@
 package eu.senla;
 
 import config.Config;
+import io.qameta.allure.*;
 import net.bytebuddy.utility.RandomString;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -18,16 +19,27 @@ public class UnsuccessLoginTest extends BaseTest {
   }
 
   @Test(dataProvider = "getCredentials", description = "Failed login with invalid credentials")
+  @Epic("Login")
+  @Feature("Login page")
+  @Story("Unsuccess login")
+  @Severity(SeverityLevel.CRITICAL)
+  @Owner("AliakseiL")
+  @Description("Тест неуспешного логина юзера")
   void invalidCredentialsTest(String username, String password) {
 
     LoginPage loginPage = new LoginPage(driver);
     loginPage.login(username, password);
 
-    SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Invalid credentials", loginPage.getUnsuccessfulLoginTaosterText());
-    softAssert.assertEquals(driver.getCurrentUrl(), Config.get("app.url"));
-    softAssert.assertAll();
-    driver.navigate().refresh();
+    Allure.step(
+        "Unsuccess login with invalid credentials",
+        () -> {
+          SoftAssert softAssert = new SoftAssert();
+          softAssert.assertEquals(
+              "Invalid credentials", loginPage.getUnsuccessfulLoginTaosterText());
+          softAssert.assertEquals(driver.getCurrentUrl(), Config.get("app.url"));
+          softAssert.assertAll();
+          driver.navigate().refresh();
+        });
   }
 
   @DataProvider(name = "getCredentials")

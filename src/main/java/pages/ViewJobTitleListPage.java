@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,11 +15,13 @@ public class ViewJobTitleListPage extends BasePage {
     super(driverParam);
   }
 
+  @Step("Go to the page Add job title page")
   public AddJobTitlePage openAddJobTitlesPage() {
     click(addButton);
     return new AddJobTitlePage(getDriver());
   }
 
+  @Step("Delete job title")
   public ViewJobTitleListPage deleteJobTitle(final String jobTitle) {
     By rowLocator =
         By.xpath(
@@ -27,6 +30,7 @@ public class ViewJobTitleListPage extends BasePage {
     return this;
   }
 
+  @Step("Agree with job title deletion")
   public ViewJobTitleListPage agreeWithDelitingJobTitle() {
     click(yesDeleteButtonInModalWindow);
     return this;

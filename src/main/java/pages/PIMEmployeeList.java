@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,6 +18,7 @@ public class PIMEmployeeList extends BasePage {
     super(driver);
   }
 
+  @Step("Save new PIM employee user")
   public PIMAddEmployee clickAddButton() {
     click(addPimUserButton);
     return new PIMAddEmployee(getDriver());
@@ -32,6 +34,7 @@ public class PIMEmployeeList extends BasePage {
     return new PIMViewPersonalDetails(getDriver());
   }
 
+  @Step("Filtering employee list by job title")
   public PIMEmployeeList filteringEmployeeListByJobTitle(final String title) {
     waitForClickable(jobTitleInput);
     click(jobTitleInput);

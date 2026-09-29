@@ -1,6 +1,7 @@
 package pages;
 
 import entities.AssignLeave;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -78,6 +79,7 @@ public class LeaveAssignLeavePage extends BasePage {
     super(driverParam);
   }
 
+  @Step("Fill assign leave form: leave type, from/to date, comments")
   public LeaveAssignLeavePage fillForm(final AssignLeave assignLeave) {
     selectFromDropdown(LEAVE_TYPE_DROPDOWN, assignLeave.getLeaveType());
     enterValue(FROM_DATE_FIELD, assignLeave.getFromDate());
@@ -86,37 +88,44 @@ public class LeaveAssignLeavePage extends BasePage {
     return this;
   }
 
+  @Step("Save assign leave")
   public LeaveAssignLeavePage save() {
     click(ASSIGN_BUTTON);
     return this;
   }
 
+  @Step("Select first employee from autocomplete drop-down field")
   public LeaveAssignLeavePage selectFirstEmployee(final String typedText) {
     selectFirstAutocompleteSuggestion(EMPLOYEE_NAME_INPUT, typedText);
     return this;
   }
 
+  @Step("Select item from leave type drop-down field")
   public LeaveAssignLeavePage selectLeaveType(final String type) {
     selectFromDropdown(LEAVE_TYPE_DROPDOWN, type);
     return this;
   }
 
+  @Step("Fill date in the from date field")
   public LeaveAssignLeavePage fillFromDate(final String from) {
     enterValue(FROM_DATE_FIELD, from);
     return this;
   }
 
+  @Step("Fill date in the to date field")
   public LeaveAssignLeavePage fillToDate(final String to) {
     enterValue(TO_DATE_FIELD, to);
     unfocus();
     return this;
   }
 
+  @Step("Select item from duration partial days drop-down field")
   public LeaveAssignLeavePage selectPartialDays(final String option) {
     selectFromDropdown(PARTIAL_DAYS_DROPDOWN, option);
     return this;
   }
 
+  @Step("Select item from duration drop-down field")
   public LeaveAssignLeavePage selectDuration(final String option) {
     selectFromDropdown(DURATION_DROPDOWN, option);
     return this;
@@ -178,10 +187,12 @@ public class LeaveAssignLeavePage extends BasePage {
     return isDisplayed(DURATION_TEXT_SECOND_STRING);
   }
 
+  @Step("Get text from duration FROM drop-down field")
   public String getDurationText() {
     return getText(DURATION_TEXT_FIRST_STRING);
   }
 
+  @Step("Get text from duration TO drop-down field")
   public String getEndDayDurationText() {
     return getText(DURATION_TEXT_SECOND_STRING);
   }

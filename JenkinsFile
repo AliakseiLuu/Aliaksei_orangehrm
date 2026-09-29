@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    tools {
+        allure 'allure'
+    }
+
+    parameters {
+        String(name: 'browser', defaultValue: 'chrome', description: 'Browser to use for tests')
+        String(name: 'threadCount', defaultValue: '1', description: 'Number of parallel threads')
+        String(name: 'config', defaultValue: 'all_tests', description: 'TestNG suite file (without .xml extension)')
+        booleanParam(name: 'selenoid.enabled', defaultValue: true, description: 'Enable running on Selenoid')
+    }
+
+    environment {
+        SELENOID_URL = 'http://host.docker.internal:4444/wd/hub'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git', credentialsId: 'github-token'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh """
+                ./mvnw -B clean test \
+                    -Dbrowser=${params.browser} \
+                    -DthreadCount=${params.threadCount} \
+                    -Dconfig=${params.config} \
+                    "-Dselenoid.enabled=${params.selenoid.enabled}" \
+                """
+            }
+            post {
+                always {
+                    junit allowEmptyResults: true,
+                        testResults: '**/target/surefire-reports/*.xml',
+                        skipPublishingChecks: true
+
+                    allure includeProperties: false,
+                        jdk: '',
+                        results: [[path: 'target/allure-results']]
+                }
+            }
+        }
+    }
+}

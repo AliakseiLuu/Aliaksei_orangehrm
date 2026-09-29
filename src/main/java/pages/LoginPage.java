@@ -1,6 +1,7 @@
 package pages;
 
 import config.Config;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,6 +17,7 @@ public class LoginPage extends BasePage {
     super(driver);
   }
 
+  @Step("Login to the application as admin")
   public Dashboard login(final String name, final String pass) {
     getDriver().get(loginUrl);
     waitForClickable(loginButton);
