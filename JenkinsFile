@@ -7,6 +7,7 @@ pipeline {
     }
 
     parameters {
+        string(name: 'BRANCH', defaultValue: 'master', description: 'Ветка для сборки')
         string(name: 'browser', defaultValue: 'chrome', description: 'Browser to use for tests')
         string(name: 'threadCount', defaultValue: '1', description: 'Number of parallel threads')
         string(name: 'config', defaultValue: 'all_tests', description: 'TestNG suite file (without .xml extension)')
@@ -18,11 +19,13 @@ pipeline {
     }
 
     stages {
-       /* stage('Checkout') {
+        stage('Checkout') {
             steps {
-                git url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git', credentialsId: 'github-token'
+                git branch: "${params.BRANCH}",
+                url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git',
+                credentialsId: 'github-token'
             }
-        }*/
+        }
 
         stage('Run tests') {
             steps {
