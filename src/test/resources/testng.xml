@@ -14,12 +14,10 @@
             <class name="eu.senla.SuccessLoginTest"/>
             <class name="eu.senla.UnsuccessLoginTest"/>
             <class name="eu.senla.DashboardElementsTest"/>
-            <class name="eu.senla.AddJobTitleTest"/>
-            <class name="eu.senla.AddingPimSalesUserTest"/>
-            <class name="eu.senla.SalesPersonalDetailsFormTest"/>
+            <class name="eu.senla.JobTitleTest"/>
+            <class name="eu.senla.PimSalesUserTest"/>
             <class name="eu.senla.AddOrganizationLocationTest"/>
             <class name="eu.senla.FilterOrganizationLocationTest"/>
-            <class name="eu.senla.RemoveJobTitleTest"/>
             <class name="eu.senla.AssignLeaveFormTest"/>
             <class name="eu.senla.AssignLeaveTest"/>
             <class name="eu.senla.LogoutTest"/>

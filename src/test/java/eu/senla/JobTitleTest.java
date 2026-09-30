@@ -7,7 +7,41 @@ import org.testng.annotations.Test;
 import pages.Dashboard;
 import pages.ViewJobTitleListPage;
 
-public class RemoveJobTitleTest extends BaseTest {
+public class JobTitleTest extends BaseTest {
+
+  private boolean createJobTitle(Job job) {
+    return new Dashboard(driver)
+        .waitForDashboardHeader()
+        .getSidepanel()
+        .openAdmin()
+        .openJobTitlesPage()
+        .openAddJobTitlesPage()
+        .fillForm(job)
+        .isSuccessToasterVisible();
+  }
+
+  @Test
+  @Epic("Admin")
+  @Feature("Job management")
+  @Story("Add job title")
+  @Severity(SeverityLevel.NORMAL)
+  @Owner("AliakseiL")
+  @Description("Создание нового Job Title")
+  public void testAddJobTitle() {
+
+    Job job =
+        Job.builder()
+            .jobTitleField(faker.name().title())
+            .jobDescriptionField(faker.address().fullAddress())
+            .jobAddNoteField(faker.company().suffix())
+            .build();
+
+    boolean success = createJobTitle(job);
+
+    Allure.step(
+        "Job title successfully created, success toaster appears",
+        () -> Assert.assertTrue(success, "Job title doesn't created"));
+  }
 
   @Test
   @Epic("Admin")
@@ -25,14 +59,7 @@ public class RemoveJobTitleTest extends BaseTest {
             .jobAddNoteField(faker.company().suffix())
             .build();
 
-    boolean success =
-        new Dashboard(driver)
-            .getSidepanel()
-            .openAdmin()
-            .openJobTitlesPage()
-            .openAddJobTitlesPage()
-            .fillForm(job)
-            .isSuccessToasterVisible();
+    boolean success = createJobTitle(job);
 
     Allure.step(
         "Job title successfully created, success toaster appears",
