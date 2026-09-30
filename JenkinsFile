@@ -55,6 +55,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    //Очищаем данные один раз в самом начале
+                     sh "mvn -B clean compile test-compile"
+
                     // Определяем список браузеров для запуска
                     def browsersToRun = []
                     if (params.browser == 'all') {
@@ -70,7 +73,7 @@ pipeline {
                         parallelStages["Browser-${browserName}"] = {
                             stage("Testing on ${browserName}") {
                                 sh """
-                                   mvn -B clean test \
+                                   mvn -B test \
                                     -Dbrowser=${browserName} \
                                     -DthreadCount=${params.threadCount} \
                                     -Dconfig=${params.config} \
