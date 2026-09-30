@@ -7,7 +7,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'BRANCH', defaultValue: 'master', description: 'Ветка для сборки')
+        string(name: 'BRANCH', defaultValue: 'master', description: 'Branch name for build')
         string(name: 'browser', defaultValue: 'chrome', description: 'Browser to use for tests')
         string(name: 'threadCount', defaultValue: '1', description: 'Number of parallel threads')
         string(name: 'config', defaultValue: 'all_tests', description: 'TestNG suite file (without .xml extension)')
@@ -24,6 +24,12 @@ pipeline {
                 git branch: "${params.BRANCH}",
                 url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git',
                 credentialsId: 'github-token'
+            }
+        }
+
+        stage('Check Selenoid') {
+            steps {
+                sh 'curl -sf --connect-timeout 5 ${SELENOID_URL%/wd/hub}/status'
             }
         }
 
