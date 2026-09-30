@@ -29,7 +29,26 @@ pipeline {
 
         stage('Check Selenoid') {
             steps {
-                sh 'curl -sf --connect-timeout 5 ${SELENOID_URL%/wd/hub}/status'
+                script {
+                    def status = sh(
+                        returnStatus: true,
+                        script: 'curl -s --connect-timeout 5 ${SELENOID_URL%/wd/hub}/status'
+                    )
+                    if (status != 0) {
+                        error """
+                            |Не удалось подключиться к Selenoid по адресу ${SELENOID_URL}
+                            |Проверьте:
+                            |  1. Запущен ли контейнер: docker ps --filter name=selenoid
+                            |  2. Проброшен ли порт 4444: docker port selenoid
+                            |  3. Доступен ли хаб изнутри Jenkins-контейнера:
+                            |     docker exec jenkins curl -s http://host.docker.internal:4444/status
+                            |     (для Linux контейнер Jenkins должен быть запущен с
+                            |      --add-host=host.docker.internal:host-gateway)
+                        """.stripMargin()
+                    } else {
+                        echo "Selenoid доступен: ${SELENOID_URL}"
+                    }
+                }
             }
         }
 
