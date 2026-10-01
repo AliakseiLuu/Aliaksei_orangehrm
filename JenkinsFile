@@ -19,14 +19,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: "${params.BRANCH}",
-                url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git',
-                credentialsId: 'github-token'
-            }
-        }
-
         stage('Check Selenoid') {
             steps {
                 script {
@@ -55,47 +47,39 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    //Очищаем данные один раз в самом начале
-                     sh "mvn -B clean compile test-compile"
-
-                    // Определяем список браузеров для запуска
-                    def browsersToRun = []
-                    if (params.browser == 'all') {
-                        browsersToRun = ['chrome', 'firefox']
-                    } else {
-                        browsersToRun = [params.browser]
-                    }
-
-                    // Создаем карту для параллельного запуска
+                    def browsersToRun = params.browser == 'all' ? ['chrome', 'firefox'] : [params.browser]
                     def parallelStages = [:]
 
-                     browsersToRun.each { browserName ->
+                    browsersToRun.each { browserName ->
                         parallelStages["Browser-${browserName}"] = {
-                            stage("Testing on ${browserName}") {
+                            ws("orangeHRM-${browserName}") {
+                                git branch: "${params.BRANCH}",
+                                    url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git',
+                                    credentialsId: 'github-token'
                                 sh """
-                                   mvn -B test \
-                                    -Dbrowser=${browserName} \
-                                    -DthreadCount=${params.threadCount} \
-                                    -Dconfig=${params.config} \
-                                    "-Dselenoid.enabled=${params.selenoidEnabled}"
+                                    mvn -B clean test \
+                                        -Dbrowser=${browserName} \
+                                        -DthreadCount=${params.threadCount} \
+                                        -Dconfig=${params.config} \
+                                        -Dselenoid.enabled=${params.selenoidEnabled} \
+                                        -Dselenoid.url=${SELENOID_URL}
                                 """
                             }
                         }
                     }
-
-                    // Запускаем созданные ветки параллельно
                     parallel parallelStages
                 }
             }
             post {
                 always {
-                    junit allowEmptyResults: true,
-                        testResults: '**/target/surefire-reports/*.xml',
-                        skipPublishingChecks: true
-
-                    allure includeProperties: false,
-                        jdk: '',
-                        results: [[path: 'target/allure-results']]
+                    script {
+                        def browsersToRun = params.browser == 'all' ? ['chrome', 'firefox'] : [params.browser]
+                        def allureResults = browsersToRun.collect { [path: "orangeHRM-${it}/target/allure-results"] }
+                        junit allowEmptyResults: true,
+                            testResults: 'orangeHRM-*/target/surefire-reports/*.xml',
+                            skipPublishingChecks: true
+                        allure includeProperties: false, jdk: '', results: allureResults
+                    }
                 }
             }
         }
