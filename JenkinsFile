@@ -20,8 +20,8 @@ pipeline {
 
     options {
         buildDiscarder(logRotator(
-            numToKeepStr: '2',        // хранить последние n сборок
-            artifactNumToKeepStr: '1'  // из них артефакты только у n последних
+            numToKeepStr: '3',        // хранить последние n сборок
+            artifactNumToKeepStr: '2'  // из них артефакты только у n последних
         ))
     }
 
@@ -54,6 +54,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+
+                    def mainWorkspace = env.WORKSPACE
                     def browsersToRun = params.browser == 'all' ? ['chrome', 'firefox'] : [params.browser]
                     def parallelStages = [:]
 
@@ -73,9 +75,9 @@ pipeline {
                                 """
                                 // перемещаем результаты в основной workspace джобы
                                 sh """
-                                    mkdir -p ${env.WORKSPACE}/allure-${browserName} ${env.WORKSPACE}/surefire-${browserName}
-                                    mv target/allure-results    ${env.WORKSPACE}/allure-${browserName}/ || true
-                                    mv target/surefire-reports  ${env.WORKSPACE}/surefire-${browserName}/ || true
+                                    mkdir -p ${mainWorkspace}/allure-${browserName} ${mainWorkspace}/surefire-${browserName}
+                                    mv target/allure-results    ${mainWorkspace}/allure-${browserName}/ || true
+                                    mv target/surefire-reports  ${mainWorkspace}/surefire-${browserName}/ || true
                                 """
                             }
                         }
