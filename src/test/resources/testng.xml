@@ -4,6 +4,7 @@
         <listener class-name="listener.LoggingListener"/>
         <listener class-name="listener.SuiteXmlTransformer"/>
         <listener class-name="listener.VideoListener"/>
+        <listener class-name="listener.BrowserLabelListener"/>
     </listeners>
     <test name="Smoke">
 

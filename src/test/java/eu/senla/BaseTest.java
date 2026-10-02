@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import config.AuthHelper;
 import config.Config;
 import core.DriverManager;
-import io.qameta.allure.Allure;
 import java.lang.reflect.Method;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
@@ -30,8 +29,6 @@ public class BaseTest {
     if (autoLogin) {
       AuthHelper.login(driver, username, password);
     }
-    Allure.label("browser", System.getProperty("browser", "chrome"));
-    Allure.label("threadCount", System.getProperty("threadCount", "1"));
   }
 
   @AfterMethod(alwaysRun = true)
