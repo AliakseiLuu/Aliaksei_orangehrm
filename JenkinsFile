@@ -18,6 +18,13 @@ pipeline {
         SELENOID_URL = 'http://host.docker.internal:4444/wd/hub'
     }
 
+    options {
+        buildDiscarder(logRotator(
+            numToKeepStr: '2',        // хранить последние n сборок
+            artifactNumToKeepStr: '1'  // из них артефакты только у n последних
+        ))
+    }
+
     stages {
         stage('Check Selenoid') {
             steps {
@@ -64,6 +71,12 @@ pipeline {
                                         -Dselenoid.enabled=${params.selenoidEnabled} \
                                         -Dselenoid.url=${SELENOID_URL}
                                 """
+                                // перемещаем результаты в основной workspace джобы
+                                sh """
+                                    mkdir -p ${env.WORKSPACE}/allure-${browserName} ${env.WORKSPACE}/surefire-${browserName}
+                                    mv target/allure-results    ${env.WORKSPACE}/allure-${browserName}/ || true
+                                    mv target/surefire-reports  ${env.WORKSPACE}/surefire-${browserName}/ || true
+                                """
                             }
                         }
                     }
@@ -74,10 +87,12 @@ pipeline {
                 always {
                     script {
                         def browsersToRun = params.browser == 'all' ? ['chrome', 'firefox'] : [params.browser]
-                        def allureResults = browsersToRun.collect { [path: "orangeHRM-${it}/target/allure-results"] }
+                        def allureResults = browsersToRun.collect { [path: "allure-${it}"] }
+
                         junit allowEmptyResults: true,
                             testResults: 'orangeHRM-*/target/surefire-reports/*.xml',
                             skipPublishingChecks: true
+
                         allure includeProperties: false, jdk: '', results: allureResults
                     }
                 }
