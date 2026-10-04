@@ -22,6 +22,7 @@ public class BrowserLabelListener implements IInvokedMethodListener {
                         new Label()
                             .setName("threadCount")
                             .setValue(System.getProperty("threadCount", "1")));
+                exec.setHistoryId(exec.getHistoryId() + "[" + browser + "]");
               });
     }
   }
