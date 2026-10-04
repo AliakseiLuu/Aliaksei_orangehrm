@@ -79,8 +79,8 @@ pipeline {
                                 sh """
                                     rm -rf ${mainWorkspace}/allure-${browserName} ${mainWorkspace}/surefire-${browserName}
                                     mkdir -p ${mainWorkspace}/allure-${browserName} ${mainWorkspace}/surefire-${browserName}
-                                    mv target/allure-results    ${mainWorkspace}/allure-${browserName}/ || true
-                                    mv target/surefire-reports  ${mainWorkspace}/surefire-${browserName}/ || true
+                                    mv target/allure-results/*    ${mainWorkspace}/allure-${browserName}/
+                                    mv target/surefire-reports/*  ${mainWorkspace}/surefire-${browserName}/
                                 """
                             }
                         }
