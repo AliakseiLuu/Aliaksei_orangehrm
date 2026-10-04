@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'maven'
-        allure 'allure'
+        allure 'allure2'
     }
 
     parameters {
