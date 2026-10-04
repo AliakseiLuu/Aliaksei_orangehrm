@@ -16,13 +16,10 @@ public class BrowserLabelListener implements IInvokedMethodListener {
       Allure.getLifecycle()
           .updateTestCase(
               exec -> {
+                exec.setName(exec.getName() + " [" + browser + "]");
                 exec.getLabels().add(new Label().setName("browser").setValue(browser));
                 exec.getLabels().add(new Label().setName("tag").setValue(browser));
                 exec.getLabels().add(new Label().setName("threadCount").setValue(threadCount));
-                String base = exec.getHistoryId();
-                if (!base.endsWith("[" + browser + "]")) {
-                  exec.setHistoryId(base + "[" + browser + "]");
-                }
               });
     }
   }
