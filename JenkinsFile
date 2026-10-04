@@ -65,6 +65,7 @@ pipeline {
                                 git branch: "${params.BRANCH}",
                                     url: 'https://github.com/AliakseiLuu/Aliaksei_orangehrm.git',
                                     credentialsId: 'github-token'
+                            catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                                 sh """
                                     mvn -B clean test \
                                         -Dbrowser=${browserName} \
@@ -73,6 +74,7 @@ pipeline {
                                         -Dselenoid.enabled=${params.selenoidEnabled} \
                                         -Dselenoid.url=${SELENOID_URL}
                                 """
+                            }
                                 // перемещаем результаты в основной workspace джобы
                                 sh """
                                     mkdir -p ${mainWorkspace}/allure-${browserName} ${mainWorkspace}/surefire-${browserName}
@@ -92,7 +94,7 @@ pipeline {
                         def allureResults = browsersToRun.collect { [path: "allure-${it}"] }
 
                         junit allowEmptyResults: true,
-                            testResults: 'orangeHRM-*/target/surefire-reports/*.xml',
+                            testResults: 'surefire-*/*.xml',
                             skipPublishingChecks: true
 
                         allure includeProperties: false, jdk: '', results: allureResults
