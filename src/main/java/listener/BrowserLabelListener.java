@@ -22,10 +22,6 @@ public class BrowserLabelListener implements IInvokedMethodListener {
                 exec.getLabels().add(new Label().setName("tag").setValue(browser));
                 exec.getLabels().add(new Label().setName("threadCount").setValue(threadCount));
                 exec.getParameters().add(new Parameter().setName("Browser").setValue(browser));
-                /*String base = exec.getHistoryId();
-                if (!base.endsWith("[" + browser + "]")) {
-                  exec.setHistoryId(base + "[" + browser + "]");
-                }*/
               });
     }
   }
