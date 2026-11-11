@@ -7,7 +7,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'BRANCH', defaultValue: 'master', description: 'Branch name for build')
+        string(name: 'BRANCH', defaultValue: 'master', description: 'Branch name for build (use 2_lecture_2-Allure branch with jenkinsfile)')
         choice(name: 'browser', choices: ['all', 'chrome', 'firefox'], description: 'Browser to use for tests')
         string(name: 'threadCount', defaultValue: '1', description: 'Number of parallel threads')
         string(name: 'config', defaultValue: 'all_tests', description: 'TestNG suite file (without .xml extension)')
