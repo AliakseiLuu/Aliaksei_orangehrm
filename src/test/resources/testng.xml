@@ -5,6 +5,7 @@
         <listener class-name="listener.LoggingListener"/>
         <listener class-name="listener.SuiteXmlTransformer"/>
         <listener class-name="listener.VideoListener"/>
+        <listener class-name="listener.RetryTransformer"/>
     </listeners>
     <test name="Smoke">
 
